@@ -1,0 +1,353 @@
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.45 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| csa0508            |
+| dbmslab            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use DBMSLAB;
+Database changed
+mysql> create table student
+    -> (
+    -> regno INT(3),
+    -> name VARCHAR(15),
+    -> gender CHAR(1),
+    -> DOB DATE,
+    -> mobileNo BIGINT,
+    -> city VARCHAR(15)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.15 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| mobileNo | bigint      | YES  |     | NULL    |       |
+| city     | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+mysql> create table faculty
+    -> (
+    -> FacNo VARCHAR(4),
+    -> FacName VARCHAR(15),
+    -> Gender CHAR(1),
+    -> DOB DATE,
+    -> DOJ DATE,
+    -> MobileNo BIGINT
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| FacNo    | varchar(4)  | YES  |     | NULL    |       |
+| FacName  | varchar(15) | YES  |     | NULL    |       |
+| Gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| DOJ      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> create table department
+    -> (
+    -> DeptNo VARCHAR(4),
+    -> DeptName VARCHAR(15),
+    -> DeptHead VARCHAR(4)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| DeptNo   | varchar(4)  | YES  |     | NULL    |       |
+| DeptName | varchar(15) | YES  |     | NULL    |       |
+| DeptHead | varchar(4)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> create table course
+    -> (
+    -> CourseNo varchar(3),
+    -> CourseDesc varchar(14),
+    -> CourseType CHAR(1),
+    -> HallNo VARCHAR(4),
+    -> FacNo varchar(4)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc course;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| CourseNo   | varchar(3)  | YES  |     | NULL    |       |
+| CourseDesc | varchar(14) | YES  |     | NULL    |       |
+| CourseType | char(1)     | YES  |     | NULL    |       |
+| HallNo     | varchar(4)  | YES  |     | NULL    |       |
+| FacNo      | varchar(4)  | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table faculty
+    -> add Dept varchar(10);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| FacNo    | varchar(4)  | YES  |     | NULL    |       |
+| FacName  | varchar(15) | YES  |     | NULL    |       |
+| Gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| DOJ      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
+| Dept     | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+mysql> rename table course to course_new;
+Query OK, 0 rows affected (0.07 sec)
+mysql> show tables;
++-------------------+
+| Tables_in_dbmslab |
++-------------------+
+| course_new        |
+| department        |
+| faculty           |
+| student           |
++-------------------+
+4 rows in set (0.05 sec)
+
+mysql> rename table course_new to course;
+Query OK, 0 rows affected (0.05 sec)
+mysql> drop table course;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_dbmslab |
++-------------------+
+| department        |
+| faculty           |
+| student           |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| mobileNo | bigint      | YES  |     | NULL    |       |
+| city     | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| FacNo    | varchar(4)  | YES  |     | NULL    |       |
+| FacName  | varchar(15) | YES  |     | NULL    |       |
+| Gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| DOJ      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
+| Dept     | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+mysql> desc department ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| DeptNo   | varchar(4)  | YES  |     | NULL    |       |
+| DeptName | varchar(15) | YES  |     | NULL    |       |
+| DeptHead | varchar(4)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> desc course;
+ERROR 1146 (42S02): Table 'dbmslab.course' doesn't exist
+mysql> create table student2
+    -> (
+    -> regno int,
+    -> s1Name varchar(20),
+    -> gender char(1),
+    -> DOB date,
+    -> MobileNo BIGINT,
+    -> city varchar(20)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc student2;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | YES  |     | NULL    |       |
+| s1Name   | varchar(20) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> CREATE TABLE student3
+    -> (
+    -> regno INT,
+    -> courseNo VARCHAR(20),
+    -> Marks INT
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESC student3;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | YES  |     | NULL    |       |
+| courseNo | varchar(20) | YES  |     | NULL    |       |
+| Marks    | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE student2
+    -> ADD PRIMARY KEY(regno);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc student2;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | NO   | PRI | NULL    |       |
+| s1Name   | varchar(20) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> ALTER TABLE FACULTY
+    -> ADD PRIMARY KEY(FacNo);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| FacNo    | varchar(4)  | NO   | PRI | NULL    |       |
+| FacName  | varchar(15) | YES  |     | NULL    |       |
+| Gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| DOJ      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
+| Dept     | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> ALTER TABLE FACULTY
+    -> ADD CONSTRAINT chk_gender
+    -> CHECK (Gender IN ('M','F'));
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE department
+    -> ADD PRIMARY KEY (DeptNo);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| DeptNo   | varchar(4)  | NO   | PRI | NULL    |       |
+| DeptName | varchar(15) | YES  |     | NULL    |       |
+| DeptHead | varchar(4)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> ALTER TABLE course
+    -> ADD PRIMARY KEY(CourseNo);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc course;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| CourseNo   | int         | NO   | PRI | NULL    |       |
+| CourseName | varchar(20) | YES  |     | NULL    |       |
+| CourseType | char(1)     | YES  |     | NULL    |       |
+| HallNo     | varchar(4)  | YES  |     | NULL    |       |
+| FacNo      | varchar(4)  | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+mysql> ALTER TABLE STUDENT2
+    -> ADD CONSTRAINT uq_student_name
+    -> UNIQUE (S1Name);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student2;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | NO   | PRI | NULL    |       |
+| s1Name   | varchar(20) | YES  | UNI | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| MobileNo | bigint      | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> ALTER TABLE STUDENT3
+    -> ADD PRIMARY KEY (RegNo);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student3;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | NO   | PRI | NULL    |       |
+| courseNo | varchar(20) | YES  |     | NULL    |       |
+| Marks    | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> ALTER TABLE STUDENT3
+    -> ADD CONSTRAINT fk_regno
+    -> FOREIGN KEY (RegNo)
+    -> REFERENCES STUDENT2(RegNo);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
